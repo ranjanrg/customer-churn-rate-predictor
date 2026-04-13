@@ -1,5 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 df = pd.read_csv('train.csv')
 
@@ -50,5 +53,24 @@ y = df['Churn']
 
 x_train, x_test, y_train, y_test =  train_test_split(x, y, test_size=0.2, random_state=42)
 
-print(x_train.shape)
-print(x_test.shape)
+scaler = StandardScaler()
+
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
+
+model = LogisticRegression(max_iter=1000, class_weight='balanced')
+
+model.fit(x_train, y_train)
+
+prediction = model.predict(x_test)
+
+accuracy_score = accuracy_score(y_test, prediction)
+print("Accuracy: ", accuracy_score)
+
+con_mat = confusion_matrix(y_test, prediction)
+print("Confusion Matrix: ", con_mat)
+
+print(classification_report(y_test, prediction))
+
+
+
