@@ -48,7 +48,3 @@ customer-churn-rate-predictor/
 ## 📋 Features Used
 
 The model uses customer attributes including tenure, monthly charges, total charges, internet service type, contract type, payment method, and various add-on services like online security, streaming, and tech support.
-
-## 📄 License
-
-[MIT](https://choosealicense.com/licenses/mit/)
